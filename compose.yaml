@@ -1,4 +1,6 @@
 services:
+
+  # Service with the spring back-end
   film-library:
     build:
       context: ./back-end/film-library-service 
@@ -6,3 +8,30 @@ services:
     image: film-library-service:latest
     ports:
       - "8080:8080"
+    depends_on:
+      - minio
+    environment:
+      AWS_S3_ENDPOINT_URL: http://minio:${MINIO_PORT}
+      AWS_S3_ACCESS_KEY: ${MINIO_ROOT_USER}
+      AWS_S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      AWS_S3_REGION: eu-east-1
+
+
+  # MinIO service for s3 object storage emulation
+  minio:
+    image: minio/minio:latest
+    ports:
+      # API port
+      - "9000:${MINIO_PORT}"
+      # Browser port
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+
+
+volumes:
+  minio-data:
