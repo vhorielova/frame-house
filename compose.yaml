@@ -1,1 +1,8 @@
-#we will build our services using docker compose
+services:
+  film-library:
+    build:
+      context: ./back-end/film-library-service 
+      dockerfile: Dockerfile
+    image: film-library-service:latest
+    ports:
+      - "8080:8080"
