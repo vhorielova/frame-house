@@ -1,4 +1,7 @@
 
+# syntax=docker/dockerfile:1
+
+# Stage for building the application with maven
 FROM openjdk:17-jdk-alpine AS builder
 
 WORKDIR /film-library-service
@@ -11,6 +14,7 @@ COPY src src
 
 RUN ["./mvnw", "package"]
 
+# Stage for copying the target without unnecessary files and running the application
 FROM openjdk:17-jdk-alpine
 WORKDIR /film-library-service
 
