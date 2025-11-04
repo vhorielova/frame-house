@@ -1,14 +1,13 @@
 package com.fcsc.pi.framehouse.service;
 
+import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 
@@ -34,7 +33,11 @@ public class S3StorageService implements IStorageService {
     }
 
     @Override
-    public void save(MultipartFile file) throws IOException {
+    public void save(MultipartFile file) throws IOException, FileAlreadyExistsException {
+
+        if (doesFileExist(file.getOriginalFilename())) {
+            throw new FileAlreadyExistsException(file.getOriginalFilename());
+        }
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -57,6 +60,19 @@ public class S3StorageService implements IStorageService {
                 .bucket(bucketName)
                 .key(withPosterPath(filename))
                 .build());
+    }
+
+    @Override
+    public boolean doesFileExist(String filename) {
+        try {
+        s3Client.headObject(HeadObjectRequest.builder()
+                .bucket(bucketName)
+                .key(withPosterPath(filename))
+                .build());
+        return true;
+        } catch (NoSuchKeyException e) {
+            return false;
+        }
     }
 
     @Override
