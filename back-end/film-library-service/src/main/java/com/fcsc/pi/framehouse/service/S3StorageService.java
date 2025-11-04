@@ -1,8 +1,11 @@
 package com.fcsc.pi.framehouse.service;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
+import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -10,6 +13,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class S3StorageService implements IStorageService {
@@ -56,6 +60,11 @@ public class S3StorageService implements IStorageService {
 
     @Override
     public void delete(String filename) {
+
+        if (!doesFileExist(filename)) {
+            throw new FileDoesNotExistException(filename);
+        }
+
         s3Client.deleteObject(DeleteObjectRequest.builder()
                 .bucket(bucketName)
                 .key(withPosterPath(filename))
@@ -65,24 +74,23 @@ public class S3StorageService implements IStorageService {
     @Override
     public boolean doesFileExist(String filename) {
         try {
-        s3Client.headObject(HeadObjectRequest.builder()
-                .bucket(bucketName)
-                .key(withPosterPath(filename))
-                .build());
-        return true;
+            s3Client.headObject(HeadObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(withPosterPath(filename))
+                    .build());
+            return true;
         } catch (NoSuchKeyException e) {
             return false;
         }
     }
 
     @Override
-    public MultipartFile load(String filename) {
-
-        s3Client.getObject(GetObjectRequest.builder()
+    public Resource load(String filename) throws IOException {
+        InputStream response = s3Client.getObject(
+                GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(withPosterPath(filename))
                 .build());
-
-        return null;
+        return new InputStreamResource(response);
     }
 }
