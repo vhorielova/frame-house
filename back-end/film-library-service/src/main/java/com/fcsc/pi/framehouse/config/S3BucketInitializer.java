@@ -3,12 +3,14 @@ package com.fcsc.pi.framehouse.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.BucketAlreadyExistsException;
+import software.amazon.awssdk.services.s3.model.BucketAlreadyOwnedByYouException;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
 
 @Component
@@ -19,6 +21,7 @@ public class S3BucketInitializer implements ApplicationRunner {
     final private S3Client s3Client;
     final private String bucketName;
 
+    @Autowired
     S3BucketInitializer(
             S3Client s3Client,
             @Value("${s3.bucket.name}") String bucketName) {
@@ -32,7 +35,7 @@ public class S3BucketInitializer implements ApplicationRunner {
             s3Client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build());
             logger.info("New bucket '{}' have been created.", bucketName);
         }
-        catch (BucketAlreadyExistsException e) {
+        catch (BucketAlreadyExistsException | BucketAlreadyOwnedByYouException e) {
             logger.info("Bucket {} already exists. No need to create a new one", bucketName);
         }
     }
