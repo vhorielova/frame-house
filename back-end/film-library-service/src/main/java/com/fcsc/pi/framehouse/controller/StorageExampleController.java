@@ -1,7 +1,7 @@
 package com.fcsc.pi.framehouse.controller;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
-import com.fcsc.pi.framehouse.service.IStorageService;
+import com.fcsc.pi.framehouse.service.storage.IStorageService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
