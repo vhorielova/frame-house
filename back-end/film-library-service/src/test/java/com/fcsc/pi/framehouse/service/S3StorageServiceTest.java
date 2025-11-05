@@ -38,12 +38,17 @@ class S3StorageServiceTest {
     }
 
     @Test
-    void saveCorrect() {
+    void saveCorrect() throws IOException {
         when(
                 s3Client.headObject(any(HeadObjectRequest.class))
         ).thenThrow(NoSuchKeyException.class);
 
-        MultipartFile file = new MockMultipartFile("file", "file".getBytes());
+        MultipartFile file = Mockito.mock(MultipartFile.class);
+
+        when (file.getOriginalFilename()).thenReturn("file.png");
+        when (file.getSize()).thenReturn(1L);
+        when (file.getContentType()).thenReturn("image/png");
+        when (file.getInputStream()).thenReturn( new ByteArrayInputStream("file content example".getBytes()));
 
         assertDoesNotThrow(() -> {
             s3StorageService.save(file);
