@@ -32,6 +32,24 @@ public class S3StorageService implements IStorageService {
         this.postersFolder = postersFolder;
     }
 
+    // -------------
+    // Helper private methods
+    // ------------
+
+    // Gets filename (without path) from the given MultiparFile
+    static private String extractOnlyFileName(MultipartFile file) {
+        String fileName = Path.of(
+                Objects.requireNonNull(
+                        file.getOriginalFilename())
+        ).getFileName().toString();
+
+        if (fileName.isEmpty()) {
+            throw new IllegalArgumentException("Filename is empty: " + fileName);
+        }
+
+        return fileName;
+    }
+
     private String withPosterPath(String filename) {
         return postersFolder + "/" + filename;
     }
@@ -45,7 +63,7 @@ public class S3StorageService implements IStorageService {
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
-                .key(withPosterPath(file.getName()))
+                .key(withPosterPath(extractOnlyFileName(file)))
                 .contentType(file.getContentType())
                 .contentLength(file.getSize())
                 .build();
