@@ -2,11 +2,11 @@ package com.fcsc.pi.framehouse.service;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
+import com.fcsc.pi.framehouse.service.storage.S3StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +16,6 @@ import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

@@ -1,4 +1,4 @@
-package com.fcsc.pi.framehouse.service;
+package com.fcsc.pi.framehouse.service.storage;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
