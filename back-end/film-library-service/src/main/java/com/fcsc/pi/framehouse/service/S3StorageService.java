@@ -14,6 +14,8 @@ import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.Objects;
 
 @Service
 public class S3StorageService implements IStorageService {
@@ -54,6 +56,20 @@ public class S3StorageService implements IStorageService {
         return postersFolder + "/" + filename;
     }
 
+    // -------------
+    // IStorageService implementation methods
+    // ------------
+
+    @Override
+    public boolean doesFileExist(String filename) {
+        try {
+            loadMetadata(filename);
+            return true;
+        } catch (FileDoesNotExistException e) {
+            return false;
+        }
+    }
+
     @Override
     public void save(MultipartFile file) throws IOException, FileAlreadyExistsException {
 
@@ -90,15 +106,15 @@ public class S3StorageService implements IStorageService {
     }
 
     @Override
-    public boolean doesFileExist(String filename) {
+    public HeadObjectResponse loadMetadata(String filename) throws FileDoesNotExistException {
         try {
-            s3Client.headObject(HeadObjectRequest.builder()
+            return s3Client.headObject(HeadObjectRequest.builder()
                     .bucket(bucketName)
                     .key(withPosterPath(filename))
                     .build());
-            return true;
+
         } catch (NoSuchKeyException e) {
-            return false;
+            throw new FileDoesNotExistException(filename);
         }
     }
 
