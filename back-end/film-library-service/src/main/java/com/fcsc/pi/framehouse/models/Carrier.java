@@ -15,11 +15,11 @@ import org.hibernate.type.SqlTypes;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name= "film")
-public class Film extends BaseEntity{
+@Table(name= "carrier")
+public class Carrier extends BaseEntity{
     @Column (name = "carrier")
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    private Carrier type;
+    private CarrierType type;
 
     @Column (name = "amount")
     private int amount;
@@ -27,5 +27,5 @@ public class Film extends BaseEntity{
     @Column (name = "film_id")
     private int filmId;
 
-    enum Carrier{dvd, flash_card, online, other}
+    enum CarrierType{dvd, flash_card, online, other}
 }
