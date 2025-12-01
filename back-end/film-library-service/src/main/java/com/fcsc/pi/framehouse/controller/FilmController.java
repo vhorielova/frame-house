@@ -3,10 +3,11 @@ package com.fcsc.pi.framehouse.controller;
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
 import com.fcsc.pi.framehouse.models.Film;
 import com.fcsc.pi.framehouse.service.FilmService;
-import jakarta.websocket.server.PathParam;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,8 +29,13 @@ public class FilmController {
         return ResponseEntity.ok("Film was added successfully");
     }
 
+    /**
+     * Searches film with matching title.
+     * Title must be at least 2 symbols.
+     */
+    @Validated
     @GetMapping("/search")
-    public ResponseEntity<List<Film>> search(@PathParam("title") String title) {
+    public ResponseEntity<List<Film>> search(@RequestParam("title") @Size(min=2) String title) {
         return  ResponseEntity.ok(filmService.searchFilmByTitle(title));
     }
 }
