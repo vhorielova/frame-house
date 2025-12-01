@@ -52,5 +52,22 @@ public class FilmServiceImpl implements FilmService {
     private List<Genre> mapNamesToGenres(List<String> names) throws GenreNotFoundException {
         return names.stream().map(genreService::createIfNotExistsAndGet).toList();
     }
+
+    /**
+     * Searched for matching film names.
+     */
+    @Override
+    public List<Film> searchFilmByTitle(String title) {
+        return searchFilmByTitle(title, true);
+    }
+
+    @Override
+    public List<Film> searchFilmByTitle(String title, boolean withoutDescriptions) {
+        List<Film> films = filmRepository.findByTitleContainingIgnoreCase(title);
+        if (withoutDescriptions) {
+            films.forEach(film -> { film.setDesctiprion(null); });
+        }
+        return films;
+    }
 }
 
