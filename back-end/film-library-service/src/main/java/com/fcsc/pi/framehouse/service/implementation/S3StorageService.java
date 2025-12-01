@@ -1,7 +1,8 @@
-package com.fcsc.pi.framehouse.service.storage;
+package com.fcsc.pi.framehouse.service.implementation;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
+import com.fcsc.pi.framehouse.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -17,15 +18,17 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Objects;
 
+import static java.lang.Math.min;
+
 @Service
-public class S3StorageService implements IStorageService {
+public class S3StorageService implements StorageService {
 
     final private S3Client s3Client;
     final private String bucketName;
     final private String postersFolder;
 
     @Autowired
-    S3StorageService(S3Client s3Client,
+    public S3StorageService(S3Client s3Client,
                      @Value("${s3.bucket.name}") String bucketName,
                      @Value("${s3.posters-folder-name}") String postersFolder
     ) {
@@ -52,12 +55,45 @@ public class S3StorageService implements IStorageService {
         return fileName;
     }
 
+    /**
+     * Generates taking up to tree first words from the name.
+     * If such film exists, increments suffix, e.g. nice_film_1, nice_film_2 ect
+    */
+    private String generateFilename(String name) {
+
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Filename is empty: " + name);
+        }
+
+        // Building the initial name with up to 3 words
+        final String LETTER_DIGITS_REGEX = "[^\\p{L}\\p{N}]";
+        String nameOnlyAllowedChars = name.replaceAll(LETTER_DIGITS_REGEX, "");
+        String[] words = nameOnlyAllowedChars.split(" ");
+        if (words.length == 0) {
+            words = new String[]{"film"};
+        }
+        StringBuilder initialFilenameBuilder = new StringBuilder();
+        for (int i = 0; i < min(words.length, 3); i++) {
+            initialFilenameBuilder.append(words[i]);
+        }
+
+        // Checking available names
+        String filename = initialFilenameBuilder.toString();
+        int i = 0;
+        while (doesFileExist(filename)) {
+            filename = initialFilenameBuilder + "_" + i;
+            i++;
+        }
+
+        return filename;
+    }
+
     private String withPosterPath(String filename) {
         return postersFolder + "/" + filename;
     }
 
     // -------------
-    // IStorageService implementation methods
+    // StorageService implementation methods
     // ------------
 
     @Override
@@ -90,6 +126,28 @@ public class S3StorageService implements IStorageService {
         );
 
         s3Client.putObject(putObjectRequest, requestBody);
+    }
+
+    @Override
+    public String generateNameAndSave(MultipartFile file, String filmName) throws IOException, FileAlreadyExistsException {
+
+        String fileName = generateFilename(filmName);
+
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(withPosterPath(fileName))
+                .contentType(file.getContentType())
+                .contentLength(file.getSize())
+                .build();
+
+        RequestBody requestBody = RequestBody.fromInputStream(
+                file.getInputStream(),
+                file.getSize()
+        );
+
+        s3Client.putObject(putObjectRequest, requestBody);
+
+        return fileName;
     }
 
     @Override

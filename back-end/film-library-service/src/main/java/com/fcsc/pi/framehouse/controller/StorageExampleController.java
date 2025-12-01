@@ -1,7 +1,7 @@
 package com.fcsc.pi.framehouse.controller;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
-import com.fcsc.pi.framehouse.service.storage.IStorageService;
+import com.fcsc.pi.framehouse.service.StorageService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @AllArgsConstructor
 public class StorageExampleController {
 
-    final private IStorageService storageService;
+    final private StorageService storageService;
 
     @GetMapping
     public String storageExample() {

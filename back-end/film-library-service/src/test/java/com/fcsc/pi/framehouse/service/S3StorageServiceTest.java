@@ -2,7 +2,7 @@ package com.fcsc.pi.framehouse.service;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
-import com.fcsc.pi.framehouse.service.storage.S3StorageService;
+import com.fcsc.pi.framehouse.service.implementation.S3StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
