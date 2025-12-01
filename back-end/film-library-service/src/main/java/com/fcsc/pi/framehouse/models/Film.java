@@ -1,12 +1,12 @@
 package com.fcsc.pi.framehouse.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -28,8 +28,13 @@ public class Film extends BaseEntity {
     private String company;
 
     @Column (name = "image_filepath")
-    private String imageUrl;
+    private String posterFilename;
 
-    @Column (name = "genre_id")
-    private int genreId;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "film_genre",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres;
 }
