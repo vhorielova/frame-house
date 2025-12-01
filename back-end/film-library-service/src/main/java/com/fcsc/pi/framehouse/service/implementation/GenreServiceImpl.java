@@ -17,6 +17,13 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Genre createIfNotExistsAndGet(String name) {
         Optional<Genre> optionalGenre = genreRepository.findByName(name);
-        return optionalGenre.orElseGet(() -> genreRepository.save(new Genre()));
+
+        if (optionalGenre.isPresent()) {
+            return optionalGenre.get();
+        } else {
+            Genre genre = new Genre();
+            genre.setName(name);
+            return genreRepository.save(genre);
+        }
     }
 }
