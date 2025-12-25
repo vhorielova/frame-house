@@ -4,3 +4,28 @@
   padding: 2rem;
   text-align: center;
 }
+
+
+body {
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+* {
+  font-family: inherit;
+}
+
+h2 {
+    margin: 0px;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    
+    min-height: 100vh;
+    
+    background-color: #fff; 
+}

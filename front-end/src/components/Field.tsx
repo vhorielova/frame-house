@@ -14,7 +14,7 @@ export default function Field({name, placeholder, onChange}: Props) {
 
     return <div className="field">
         <span className="field-name">{name}</span>
-        <input className="field-input" type="text" placeholder={placeholder} onChange={(e) => onChange(e.target.value)}></input>
+        <input className="field-box field-input field-placeholder" type="text" placeholder={placeholder} onChange={(e) => onChange(e.target.value)}></input>
     </div>
 
 }

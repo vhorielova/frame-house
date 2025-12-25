@@ -18,7 +18,7 @@
     justify-content: start;    
     gap: 30px;
     
-    width: 300px; 
+    min-width: 300px; 
     
     box-shadow: 0px 10px 10px rgba(0,0,0,0.2);
 
@@ -39,8 +39,8 @@
 .field{
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
-
 }
 
 .field-name{
@@ -48,23 +48,30 @@
     font-size:xx-small;
     font-weight:600;
 }
-.field-input{
+
+.field-box{
+    font-family: inherit;
     border-radius: 7px;
-    height: 48px;
     border: 1px solid black;
     padding-left: 15px;
-
     font-size: x-small;
     font-weight: 500;
 
     box-sizing: border-box;
-    width: 100%;
-    
 }
 
-.field-input::placeholder {
+.field-placeholder::placeholder {
     color:#c7c7c7;
     font-weight: 600;
+}
+
+.field-input{
+    height: 48px;
+    width: 100%;
+}
+.field-text-area {
+    height: 96px;
+    min-width: 100%;
 }
 
 .field-input:hover {

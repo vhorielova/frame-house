@@ -2,16 +2,17 @@ import { useState } from "react";
 import Form from "../../components/Form";
 import Field from "../../components/Field";
 import Button from "../../components/Button";
+import TextArea from "../../components/TextArea";
 
 export default function AddBookForm() {
   const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("");
+  const [description, setDescription] = useState("");
   const [director, setDirector] = useState("");
   const [studio, setStudio] = useState("");
 
   function handlaSubmit() {
     console.log(`Title: ${title}`);
-    console.log(`Genre: ${genre}`);
+    console.log(`Genre: ${description}`);
     console.log(`Director: ${director}`);
 
     console.log(`Studio: ${studio}`);
@@ -25,10 +26,10 @@ export default function AddBookForm() {
           placeholder="Enter film title"
           onChange={setTitle}
         />
-        <Field
-          name="Genre"
-          placeholder="Enter film genre"
-          onChange={setGenre}
+        <TextArea
+          name="Description"
+          placeholder="Enter film description"
+          onChange={setDescription}
         />
         <Field
           name="Director"
