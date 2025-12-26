@@ -1,4 +1,4 @@
-import './Components.css'
+import './Fields.css'
 
 interface Props {
     name: string;
@@ -10,7 +10,7 @@ interface Props {
  * A template for making from fields.
  * Takes field's name, placeholder's text and onChange event handler.
  */
-export default function Field({name, placeholder, onChange}: Props) {
+export default function Input({name, placeholder, onChange}: Props) {
 
     return <div className="field">
         <span className="field-name">{name}</span>

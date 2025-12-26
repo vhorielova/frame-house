@@ -11,7 +11,7 @@ interface Props {
 export default function Button({ children, onClick }: Props) {
 
 
-    return <button className="button" onClick={onClick}>
+    return <button className="button submit-button" onClick={onClick}>
         {children}
     </button>
 }

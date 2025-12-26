@@ -1,4 +1,4 @@
-import './Components.css'
+import './Fields.css'
 
 interface Props {
     name: string;
