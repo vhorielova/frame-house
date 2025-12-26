@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Form from "../../components/Form";
-import Field from "../../components/Field";
+import Input from "../../components/fields/Input";
 import Button from "../../components/Button";
-import TextArea from "../../components/TextArea";
+import TextArea from "../../components/fields/TextArea";
+import ListInput from "../../components/fields/ListInput";
 
 export default function AddBookForm() {
   const [title, setTitle] = useState("");
@@ -21,7 +22,7 @@ export default function AddBookForm() {
   return (
     <Form title="Add film">
       <div className="fields">
-        <Field
+        <Input
           name="Title"
           placeholder="Enter film title"
           onChange={setTitle}
@@ -31,16 +32,18 @@ export default function AddBookForm() {
           placeholder="Enter film description"
           onChange={setDescription}
         />
-        <Field
+        <Input
           name="Director"
           placeholder="Enter the director"
           onChange={setDirector}
         />
-        <Field
+        <Input
           name="Studio"
           placeholder="Enter the studio"
           onChange={setStudio}
         />
+
+        <ListInput></ListInput>
       </div>
 
       <Button onClick={handlaSubmit}>ADD</Button>
