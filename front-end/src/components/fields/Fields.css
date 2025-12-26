@@ -94,9 +94,9 @@
     height: 30px;
     box-sizing: border-box;
 
-
-    background-color:#4f4979;
+    background-color:white;
     border-radius: 7px;
+    border: 1px solid black;
 
     display: flex;
     align-items: center;
@@ -110,7 +110,7 @@
     margin-left: 10px;
     white-space: nowrap;
 
-    color:white;
+    color:black;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -126,13 +126,10 @@
 }
 
 .remove-button {
-    background-color: transparent;
-    color:white;
-    box-shadow: none;
-    border: none;
-}
+    width: 18px;
+    height: 18px;
 
-.remove-button:hover {
-    border-radius: 7px;
-    background-color: #c7c7c7;
+    background-color: #4f4979;
+    color:white;
+    border-radius: 3px;
 }

@@ -10,13 +10,14 @@ export default function AddBookForm() {
   const [description, setDescription] = useState("");
   const [director, setDirector] = useState("");
   const [studio, setStudio] = useState("");
+  const [genres, setGenres] = useState<string[]>([]);
 
   function handlaSubmit() {
     console.log(`Title: ${title}`);
     console.log(`Genre: ${description}`);
     console.log(`Director: ${director}`);
-
     console.log(`Studio: ${studio}`);
+    console.log(`Genres: ${genres}`)
   }
 
   return (
@@ -43,7 +44,12 @@ export default function AddBookForm() {
           onChange={setStudio}
         />
 
-        <ListInput></ListInput>
+        <ListInput
+          name="Genres"
+          placeholder="Enter the genres"
+          onChange={setGenres}
+          hints={["Fantasy", "Comedy", "Romance", "Action", "Show"]}
+        />
       </div>
 
       <Button onClick={handlaSubmit}>ADD</Button>
