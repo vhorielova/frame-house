@@ -106,7 +106,10 @@ function ValueElement({ children, onRemove }: ValueElementProps) {
 
     return <div className="list-input-chosen-item">
         <div className="list-input-text">{children}</div>
-        <button className="button remove-button" type="button" onClick={onRemove}>x</button>        
+        <button 
+            className="remove-button"
+            type="button" onClick={onRemove}
+        >✕</button>        
     </div>
     
 }

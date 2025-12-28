@@ -31,11 +31,6 @@ export default function AddBookForm() {
           placeholder="Enter film title"
           onChange={setTitle}
         />
-        <TextArea
-          name="Description"
-          placeholder="Enter film description"
-          onChange={setDescription}
-        />
         <Input
           name="Director"
           placeholder="Enter the director"
@@ -47,6 +42,13 @@ export default function AddBookForm() {
           onChange={setStudio}
         />
 
+
+        <TextArea
+          name="Description"
+          placeholder="Enter film description"
+          onChange={setDescription}
+        />
+
         <ListInput
           name="Genres"
           placeholder="Enter the genres"
@@ -55,7 +57,7 @@ export default function AddBookForm() {
         />
 
         <FileInput
-          name="Poster example"
+          name="Poster"
           onChange={setFile}
         />
       </div>
