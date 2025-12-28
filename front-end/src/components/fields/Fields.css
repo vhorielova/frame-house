@@ -17,14 +17,19 @@
 
 /* Base class for any input box */
 .field-box{
-    font-family: inherit;
+
+    box-sizing: border-box;
+    background-color: white;
+
+    padding-left: 15px;
     border-radius: 7px;
     border: 1px solid black;
-    padding-left: 15px;
+
+
+    font-family: inherit;
     font-size: x-small;
     font-weight: 500;
 
-    box-sizing: border-box;
 }
 .field-box:hover {
     border: 1px solid #1a9eff;
@@ -42,9 +47,9 @@
 }
 
 
-/*
+/*****************************
  * Specific classes for fields
- */
+ *****************************/
 
 .field-input{
     height: 48px;
@@ -65,7 +70,10 @@
 }
 
 
-/* List input field */
+/* 
+ * List input field 
+ */
+
 .list-input-bar {
     display: flex;
     width: 100%;
@@ -133,6 +141,7 @@
     height: 48px;
 }
 
+/* button with 'x' sign*/
 .remove-button {
     width: 18px;
     height: 18px;
@@ -140,4 +149,24 @@
     background-color: #4f4979;
     color:white;
     border-radius: 3px;
+}
+
+/*
+ * File input classes
+ */
+
+.field-file-invisible {
+    display: none;
+}
+
+.field-file-input {
+    width: 100%;
+    height: 154px;
+    
+    border-radius: 10px;
+}
+
+.field-file-pseudo-placeholder {
+    color:#c7c7c7;
+    font-weight: 600;
 }

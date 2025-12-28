@@ -4,6 +4,7 @@ import Input from "../../components/fields/Input";
 import Button from "../../components/Button";
 import TextArea from "../../components/fields/TextArea";
 import ListInput from "../../components/fields/ListInput";
+import FileInput from "../../components/fields/FileInput";
 
 export default function AddBookForm() {
   const [title, setTitle] = useState("");
@@ -11,13 +12,15 @@ export default function AddBookForm() {
   const [director, setDirector] = useState("");
   const [studio, setStudio] = useState("");
   const [genres, setGenres] = useState<string[]>([]);
+  const [file, setFile] = useState<File>();
 
   function handlaSubmit() {
     console.log(`Title: ${title}`);
     console.log(`Genre: ${description}`);
     console.log(`Director: ${director}`);
     console.log(`Studio: ${studio}`);
-    console.log(`Genres: ${genres}`)
+    console.log(`Genres: ${genres}`);
+    console.log(`File: ${file}`);
   }
 
   return (
@@ -49,6 +52,11 @@ export default function AddBookForm() {
           placeholder="Enter the genres"
           onChange={setGenres}
           hints={["Fantasy", "Comedy", "Romance", "Action", "Show"]}
+        />
+
+        <FileInput
+          name="Poster example"
+          onChange={setFile}
         />
       </div>
 
