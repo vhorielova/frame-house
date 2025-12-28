@@ -1,0 +1,187 @@
+/*
+ * Common classes for fields
+ */
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.field-name{
+    color: #4f4979;
+    font-size:xx-small;
+    font-weight:600;
+}
+
+/* Base class for any input box */
+.field-box{
+
+    box-sizing: border-box;
+    background-color: white;
+
+    padding-left: 15px;
+    border-radius: 7px;
+    border: 1px solid black;
+
+
+    font-family: inherit;
+    font-size: x-small;
+    font-weight: 500;
+
+}
+.field-box:hover {
+    border: 1px solid #1a9eff;
+}
+.field-box:focus {
+    outline: none;
+    border: 1px solid #1a9eff;
+    box-shadow: 0 0 0 2px #1a9eff;
+}
+
+/* Placeholder text in inputs */
+.field-placeholder::placeholder {
+    color:#c7c7c7;
+    font-weight: 600;
+}
+
+
+/*****************************
+ * Specific classes for fields
+ *****************************/
+
+.field-input{
+    height: 48px;
+    width: 100%;
+}
+
+.field-text-area {
+    height: 96px;
+    min-width: 100%;
+}
+.field-text-area {
+    height: 96px;
+    min-width: 100%;
+}
+
+.field-text-area::placeholder {
+    padding-top: 10px;
+}
+
+
+/* 
+ * List input field 
+ */
+
+.list-input-bar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+}
+
+.list-input {
+    flex-grow: 1;
+    height: 48px;
+}
+
+/* Button with + sign */
+.plus-button {
+    border-radius: 7px;
+    width: 48px;
+    min-width: 48px;
+    /* width: 15%; */
+    height: 48px;
+}
+
+.list-input-chosen-container {
+
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-content: flex-start;
+
+    padding-left: 0px;
+    margin-top: 5px;
+    gap: 5px;
+}
+
+.list-input-chosen-item {
+
+    width: fit-content;
+    max-width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+
+    background-color:white;
+    border-radius: 7px;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    
+    padding-left: 6px;
+    padding-right: 2px;
+    gap: 3px;
+}
+
+
+.list-input-chosen-item:has(.remove-button:hover) {
+    background-color: #d63031;
+}
+
+.list-input-chosen-item:has(.remove-button:hover) .list-input-text {
+    color:white;
+}
+
+.list-input-text {
+
+    font-size: x-small;
+    white-space: nowrap;
+
+    color:black;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* button with 'x' sign*/
+.remove-button {
+
+    border: none;
+    background: none;
+
+    color:#c7c7c7;
+    font-size: xx-small;
+    padding-top: 4px;
+    font-weight: 600;
+}
+
+.remove-button:hover {
+    color:white;
+}
+
+/*
+ * File input classes
+ */
+
+.field-file-invisible {
+    display: none;
+}
+
+.field-file-input {
+    width: 100%;
+    height: 154px;
+    
+    border-radius: 10px;
+}
+
+.field-file-pseudo-placeholder {
+    color:#c7c7c7;
+    font-weight: 600;
+}
