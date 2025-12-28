@@ -18,7 +18,7 @@ export default function ListInput({ name, placeholder, onChange, hints=[] }: Pro
 
     // Options for input hints
     const optionsId = name + "-options";
-    const options = hints.map((v) => <option key={name}>{v}</option>);
+    const options = hints.map((v) => <option key={v}>{v}</option>);
     // Added elements
     const valueElements = values.map((v) => 
         <ValueElement key={v} onRemove={() => removeValueFromList(v)}>
