@@ -59,16 +59,8 @@
 .field-text-area {
     height: 96px;
     min-width: 100%;
+    padding: 10px;
 }
-.field-text-area {
-    height: 96px;
-    min-width: 100%;
-}
-
-.field-text-area::placeholder {
-    padding-top: 10px;
-}
-
 
 /* 
  * List input field 
