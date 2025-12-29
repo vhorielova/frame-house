@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
@@ -18,15 +17,22 @@ h2 {
 }
 
 .page {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     
     min-height: 100vh;
     
     background-color: #fff; 
-    padding: 20px;
     box-sizing: border-box;
+}
+
+.content {
+
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
