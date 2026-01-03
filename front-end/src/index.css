@@ -26,6 +26,12 @@
   --text-placeholder: var(--palette-darker-grey);
 }
 
+
+*, *::before, *::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -33,10 +39,4 @@ html, body {
     font-family: 'Instrument Sans', sans-serif;
 }
 
-h2 {
-    margin: 0px;
-}
-
-* {
-  font-family: inherit;
-}
+  
