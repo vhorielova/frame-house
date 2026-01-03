@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
 
 import "./Common.css"
+import { Link } from "react-router-dom";
 
 
 export default function Navbar() {
@@ -9,22 +10,22 @@ export default function Navbar() {
     return <header className="navbar">
 
         <span>
-        <a href="/" className="navbar-name icon-link">
+        <Link to="/" className="navbar-name icon-link">
             <IoLibrary size={28}/>   
             <span>Frame house</span>
-        </a>
+        </Link>
         
         </span>
 
         <nav>
             <ul>
-                <li><a href="/">Homepage</a></li>
-                <li><a href="/add-film">Add film</a></li>
-                <li><a href="/log-out">Log out</a></li>
+                <li><Link to="/">Homepage</Link></li>
+                <li><Link to="/add-film">Add film</Link></li>
+                <li><Link to="/log-out">Log out</Link></li>
                 
-                <li><a href="/profile" className="icon-link">
+                <li><Link to="/profile" className="icon-link">
                         <FaUser size={28} />
-                    </a>                
+                    </Link>                
                 </li>                
             </ul>
         </nav>
