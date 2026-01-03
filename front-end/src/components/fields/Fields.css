@@ -10,7 +10,7 @@
 }
 
 .field-name{
-    color: #4f4979;
+    color: var(--text-secondary);
     font-size:xx-small;
     font-weight:600;
 }
@@ -19,11 +19,11 @@
 .field-box{
 
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--bg-surface);
 
     padding-left: 15px;
     border-radius: 7px;
-    border: 1px solid black;
+    border: 1px solid var(--border-default);
 
 
     font-family: inherit;
@@ -32,17 +32,17 @@
 
 }
 .field-box:hover {
-    border: 1px solid #1a9eff;
+    border: 1px solid var(--color-accent);
 }
 .field-box:focus {
     outline: none;
-    border: 1px solid #1a9eff;
-    box-shadow: 0 0 0 2px #1a9eff;
+    border: 1px solid var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent);
 }
 
 /* Placeholder text in inputs */
 .field-placeholder::placeholder {
-    color:#c7c7c7;
+    color:var(--text-placeholder);
     font-weight: 600;
 }
 
@@ -110,9 +110,9 @@
     height: 30px;
     box-sizing: border-box;
 
-    background-color:white;
+    background-color: var(--bg-surface);
     border-radius: 7px;
-    border: 1px solid black;
+    border: 1px solid var(--border-default);
 
     display: flex;
     align-items: center;
@@ -124,11 +124,11 @@
 
 
 .list-input-chosen-item:has(.remove-button:hover) {
-    background-color: #d63031;
+    background-color: var(--color-danger);
 }
 
 .list-input-chosen-item:has(.remove-button:hover) .list-input-text {
-    color:white;
+    color: var(--text-bright);
 }
 
 .list-input-text {
@@ -136,7 +136,7 @@
     font-size: x-small;
     white-space: nowrap;
 
-    color:black;
+    color: var(--text-main);
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -148,14 +148,14 @@
     border: none;
     background: none;
 
-    color:#c7c7c7;
+    color: var(--text-placeholder);
     font-size: xx-small;
     padding-top: 4px;
     font-weight: 600;
 }
 
 .remove-button:hover {
-    color:white;
+    color: var(--text-bright);
 }
 
 /*
@@ -174,6 +174,6 @@
 }
 
 .field-file-pseudo-placeholder {
-    color:#c7c7c7;
+    color: var(--text-placeholder);
     font-weight: 600;
 }
