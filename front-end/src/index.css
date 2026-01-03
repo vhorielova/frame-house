@@ -1,0 +1,42 @@
+:root {
+
+  /* Palette colors */
+  --palette-purple: #4f4979;
+  --palette-blue: #1a9eff;
+  --palette-red: #d63031;
+  --palette-black: black;
+  --palette-darker-grey: #c7c7c7;
+  --palette-lighter-grey: #d9d9d9;
+  --palette-white: white;
+
+  /* Color semantics */
+  --color-primary: var(--palette-purple);
+  --color-accent: var(--palette-blue);
+  --color-danger: var(--palette-red);
+
+  --bg-from: var(--palette-lighter-grey);
+  --bg-page: var(--palette-white);
+  --bg-surface: var(--palette-white);
+
+  --border-default: var(--palette-black);
+
+  --text-main: var(--palette-black);
+  --text-secondary: var(--palette-purple);
+  --text-bright: var(--palette-white);
+  --text-placeholder: var(--palette-darker-grey);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+h2 {
+    margin: 0px;
+}
+
+* {
+  font-family: inherit;
+}
