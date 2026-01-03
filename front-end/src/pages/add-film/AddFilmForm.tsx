@@ -6,7 +6,7 @@ import TextArea from "../../components/fields/TextArea";
 import ListInput from "../../components/fields/ListInput";
 import FileInput from "../../components/fields/FileInput";
 
-export default function AddBookForm() {
+export default function AddFilmForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [director, setDirector] = useState("");
