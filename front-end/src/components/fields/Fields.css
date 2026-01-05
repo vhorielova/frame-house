@@ -46,6 +46,23 @@
     font-weight: 600;
 }
 
+.errors {
+    min-width: 100%;
+    width: 0;
+    box-sizing: border-box;
+    margin-top: 4px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.error {
+    word-break: break-word; 
+
+    color: var(--color-danger);
+    font-size: xx-small;
+}
 
 /*****************************
  * Specific classes for fields

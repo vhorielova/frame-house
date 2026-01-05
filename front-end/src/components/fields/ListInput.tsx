@@ -1,16 +1,18 @@
 import { useState } from "react";
 
 import "./Fields.css"
+import FieldErrors from "./FieldErrors";
 
 interface Props {
     name: string;
     placeholder: string;
     onChange: (resultList: string[]) => void;
     hints?: string[];
+    errors?: string[];
 }
 
 
-export default function ListInput({ name, placeholder, onChange, hints=[] }: Props) {
+export default function ListInput({ name, placeholder, onChange, hints=[], errors=[] }: Props) {
     
     // Hooks
     const [value, setValue] = useState('');
@@ -92,6 +94,8 @@ export default function ListInput({ name, placeholder, onChange, hints=[] }: Pro
         <div className="list-input-chosen-container">
             {valueElements}
         </div>
+
+        <FieldErrors errors={errors}/>
         
     </div>
 
