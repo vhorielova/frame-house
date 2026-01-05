@@ -6,17 +6,17 @@ import FieldErrors from "./FieldErrors";
 interface Props {
     name: string;
     placeholder: string;
+    values: string[];
     onChange: (resultList: string[]) => void;
     hints?: string[];
     errors?: string[];
 }
 
 
-export default function ListInput({ name, placeholder, onChange, hints=[], errors=[] }: Props) {
+export default function ListInput({ name, placeholder, values, onChange, hints=[], errors=[] }: Props) {
     
     // Hooks
     const [value, setValue] = useState('');
-    const [values, setValues] = useState<string[]>([]);
 
     // Options for input hints
     const optionsId = name + "-options";
@@ -40,7 +40,6 @@ export default function ListInput({ name, placeholder, onChange, hints=[], error
             return;
         }
         const newValues = [...values, newValue];
-        setValues(newValues);
         onChange(newValues);
         setValue('');
     }
@@ -59,7 +58,6 @@ export default function ListInput({ name, placeholder, onChange, hints=[], error
         const newValues = [...values];
 
         newValues.splice(index, 1);
-        setValues(newValues);
         onChange(newValues);
     }
 

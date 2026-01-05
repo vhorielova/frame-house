@@ -81,6 +81,11 @@ export default function AddFilmForm() {
           duration: 5000,
           className: "toast", 
         }); 
+      } else {
+        toast.error("Film was not added.", {
+          duration: 5000,
+          className: "toast", 
+        });
       }
 
       console.log(response.status)
@@ -141,18 +146,21 @@ export default function AddFilmForm() {
         <Input
           name="Title"
           placeholder="Enter film title"
+          value={title}
           onChange={setTitle}
           errors={titleErrors}
         />
         <Input
           name="Director"
           placeholder="Enter the director"
+          value={director}
           onChange={setDirector}
           errors={directorErrors}
         />
         <Input
           name="Studio"
           placeholder="Enter the studio"
+          value={studio}
           onChange={setStudio}
           errors={studioErrors}
         />
@@ -161,6 +169,7 @@ export default function AddFilmForm() {
         <TextArea
           name="Description"
           placeholder="Enter film description"
+          value={description}
           onChange={setDescription}
           errors={descriptionErrors}
         />
@@ -168,6 +177,7 @@ export default function AddFilmForm() {
         <ListInput
           name="Genres"
           placeholder="Enter the genres"
+          values={genres}
           onChange={setGenres}
           hints={["Fantasy", "Comedy", "Romance", "Action", "Show"]}
           errors={genresErrors}
@@ -175,6 +185,7 @@ export default function AddFilmForm() {
 
         <FileInput
           name="Poster"
+          filename={file?.name || ''}
           onChange={setFile}
           errors={fileErrors}
         />

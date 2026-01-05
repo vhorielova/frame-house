@@ -1,17 +1,16 @@
-import { useRef, useState, type ChangeEvent } from "react";
+import { useRef, type ChangeEvent } from "react";
 import FieldErrors from "./FieldErrors";
 
 
 interface Props {
     name: string;
+    filename: string;
     onChange: (file: File) => void;
     errors?: string[];
 }
 
 
-export default function FileInput({ name, onChange, errors=[] }: Props) {
-
-    const [filename, setFilename] = useState('');
+export default function FileInput({ name, filename, onChange, errors=[] }: Props) {
 
     const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -39,7 +38,6 @@ export default function FileInput({ name, onChange, errors=[] }: Props) {
         const fileUploaded = event.target.files?.[0];
 
         if (fileUploaded) {
-            setFilename(fileUploaded.name);
             onChange(fileUploaded);
         }
 
