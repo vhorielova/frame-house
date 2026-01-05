@@ -6,6 +6,7 @@ import TextArea from "../../components/fields/TextArea";
 import ListInput from "../../components/fields/ListInput";
 import FileInput from "../../components/fields/FileInput";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AddFilmForm() {
   const [title, setTitle] = useState("");
@@ -23,6 +24,50 @@ export default function AddFilmForm() {
     console.log(`Studio: ${studio}`);
     console.log(`Genres: ${genres}`);
     console.log(`File: ${file}`);
+
+    const formData = new FormData();
+    
+    if (file) {
+      formData.append("file", file);
+    }
+
+    const filmData = {
+      title,
+      description,
+      director,
+      company: studio,
+      genres
+    }
+    const jsonBlob = new Blob([JSON.stringify(filmData)], { 
+      type: 'application/json' 
+    });
+
+    formData.append("request", jsonBlob);
+
+    try {
+
+      const response = await fetch(API_URL + "/films", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        clearForm();  
+      }
+
+      console.log(response.status)
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  function clearForm() {
+    setTitle('');
+    setDescription('');
+    setDirector('');
+    setStudio('');
+    setGenres([]);
+    setFile(undefined);
   }
 
   return (
