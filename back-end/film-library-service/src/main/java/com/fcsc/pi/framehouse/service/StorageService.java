@@ -1,4 +1,4 @@
-package com.fcsc.pi.framehouse.service.storage;
+package com.fcsc.pi.framehouse.service;
 
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileAlreadyExistsException;
 import com.fcsc.pi.framehouse.exceptions.storageservice.FileDoesNotExistException;
@@ -8,12 +8,13 @@ import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 
 import java.io.IOException;
 
-public interface IStorageService {
+public interface StorageService {
 
     void save(MultipartFile file) throws IOException, FileAlreadyExistsException;
 
-    void delete(String filename) throws FileDoesNotExistException;
+    String generateNameAndSave(MultipartFile file, String filmName) throws IOException, FileAlreadyExistsException;
 
+    void delete(String filename) throws FileDoesNotExistException;
 
     boolean doesFileExist(String filename);
 
