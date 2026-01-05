@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Form from "../../components/Form";
 import Input from "../../components/fields/Input";
-import Button from "../../components/Button";
+import SubmitButton from "../../components/SubmitButton";
 import TextArea from "../../components/fields/TextArea";
 import ListInput from "../../components/fields/ListInput";
 import FileInput from "../../components/fields/FileInput";
+
 
 export default function AddFilmForm() {
   const [title, setTitle] = useState("");
@@ -14,7 +15,8 @@ export default function AddFilmForm() {
   const [genres, setGenres] = useState<string[]>([]);
   const [file, setFile] = useState<File>();
 
-  function handlaSubmit() {
+  async function handlaSubmit(e: FormEvent) {
+    e.preventDefault();
     console.log(`Title: ${title}`);
     console.log(`Genre: ${description}`);
     console.log(`Director: ${director}`);
@@ -24,7 +26,7 @@ export default function AddFilmForm() {
   }
 
   return (
-    <Form title="Add film">
+    <Form title="Add film" onSubmit={handlaSubmit}>
       <div className="fields">
         <Input
           name="Title"
@@ -62,7 +64,7 @@ export default function AddFilmForm() {
         />
       </div>
 
-      <Button onClick={handlaSubmit}>ADD</Button>
+      <SubmitButton>ADD</SubmitButton>
 
       {/* <span>title: {title}</span> */}
     </Form>
