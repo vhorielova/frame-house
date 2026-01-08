@@ -18,6 +18,16 @@
   align-items: center;
 }
 
+.content-box {
+
+  background-color: var(--bg-from);
+
+  border-radius: 10px;
+  border: 2px solid var(--color-primary);  
+  
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.2); 
+}
+
 .toast {
   font-family: inherit !important;
   font-size: small !important;

@@ -15,7 +15,7 @@ interface Props {
  */
 export default function Form({ children, title, onSubmit }: Props) {
 
-    return <form className="form" onSubmit={onSubmit}>
+    return <form className="content-box form" onSubmit={onSubmit}>
         <h2>{title}</h2>
         {children}
     </form>
