@@ -1,6 +1,7 @@
 package com.fcsc.pi.framehouse.controller;
 
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
+import com.fcsc.pi.framehouse.dto.FilmCatalogResponse;
 import com.fcsc.pi.framehouse.models.Film;
 import com.fcsc.pi.framehouse.service.FilmService;
 import jakarta.validation.constraints.Size;
@@ -27,6 +28,21 @@ public class FilmController {
             ) {
         filmService.addFilm(request,file);
         return ResponseEntity.ok("Film was added successfully");
+    }
+
+    /**
+     * Searches for film info with the pagination and the hint.
+     * The hint string should be inside the film's title or at the beginning of the director or company name.
+     * Everything is checked in lowercase.
+     */
+    @GetMapping("/catalog")
+    public ResponseEntity<List<FilmCatalogResponse>> getCatalog(
+            @RequestParam() int pageNumber, @RequestParam() int pageSize,
+            @RequestParam(required = false) String hint
+    ) {
+        return ResponseEntity.ok(
+                filmService.getCatalog(pageNumber, pageSize, hint)
+        );
     }
 
     /**

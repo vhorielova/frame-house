@@ -1,6 +1,7 @@
 package com.fcsc.pi.framehouse.service.implementation;
 
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
+import com.fcsc.pi.framehouse.dto.FilmCatalogResponse;
 import com.fcsc.pi.framehouse.exceptions.GenreNotFoundException;
 import com.fcsc.pi.framehouse.models.Film;
 import com.fcsc.pi.framehouse.models.Genre;
@@ -8,6 +9,8 @@ import com.fcsc.pi.framehouse.repository.FilmRepository;
 import com.fcsc.pi.framehouse.service.FilmService;
 import com.fcsc.pi.framehouse.service.GenreService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,5 +72,25 @@ public class FilmServiceImpl implements FilmService {
         }
         return films;
     }
+
+    @Override
+    public List<FilmCatalogResponse> getCatalog(int pageNumber, int pageSize, String hint) {
+        Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
+        hint = hint != null? hint.toLowerCase(): "";
+
+        List<Film> films = filmRepository.getCatalog(hint, pageRequest);
+        return films.stream().map(f -> new FilmCatalogResponse(
+                f.getId(),
+                f.getTitle(),
+                f.getDirector(),
+                f.getCompany(),
+                f.getPosterFilename(),
+                f.getGenres().stream().map(
+                        Genre::getName
+                ).toList()
+        )).toList();
+    }
+
+
 }
 
