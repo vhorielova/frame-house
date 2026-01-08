@@ -1,6 +1,7 @@
 package com.fcsc.pi.framehouse.service;
 
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
+import com.fcsc.pi.framehouse.dto.FilmCatalogResponse;
 import com.fcsc.pi.framehouse.models.Film;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,5 +12,6 @@ public interface FilmService {
 
     public List<Film> searchFilmByTitle(String title);
     List<Film> searchFilmByTitle(String title, boolean withoutDescriptions);
+    List<FilmCatalogResponse> getCatalog(int page, int amount, String hint);
 
 }
