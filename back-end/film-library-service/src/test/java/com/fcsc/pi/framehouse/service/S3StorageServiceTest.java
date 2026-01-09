@@ -90,4 +90,20 @@ class S3StorageServiceTest {
         Resource result =  s3StorageService.load("file");
         assertEquals(responseMock.readAllBytes(), result.getInputStream().readAllBytes());
     }
+
+    @Test
+    void extractFilename() {
+        String[][] filenames = new String[][] {
+                {"poster.png", ".png"},
+                {"photo.film.jpg", ".jpg"},
+                {"/home/data.jpeg", ".jpeg"}
+        };
+
+        for (String[] pair: filenames) {
+            assertEquals(
+                    s3StorageService.extractExtension(pair[0]),
+                    pair[1]
+            );
+        }
+    }
 }
