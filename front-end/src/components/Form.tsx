@@ -2,6 +2,7 @@
  * This is a reusable Form component.
  */
 import { type FormEvent, type ReactNode } from "react";
+import '../style-utilities/borders.css'
 import './Components.css'
 
 
@@ -15,7 +16,7 @@ interface Props {
  */
 export default function Form({ children, title, onSubmit }: Props) {
 
-    return <form className="content-box form" onSubmit={onSubmit}>
+    return <form className="primary-border form" onSubmit={onSubmit}>
         <h2>{title}</h2>
         {children}
     </form>

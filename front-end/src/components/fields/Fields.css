@@ -17,27 +17,13 @@
 
 /* Base class for any input box */
 .field-box{
-
-    box-sizing: border-box;
     background-color: var(--bg-surface);
 
     padding-left: 15px;
-    border-radius: 7px;
-    border: 1px solid var(--border-default);
 
-
-    font-family: inherit;
     font-size: x-small;
     font-weight: 500;
 
-}
-.field-box:hover {
-    border: 1px solid var(--color-accent);
-}
-.field-box:focus {
-    outline: none;
-    border: 1px solid var(--color-accent);
-    box-shadow: 0 0 0 2px var(--color-accent);
 }
 
 /* Placeholder text in inputs */
@@ -49,7 +35,6 @@
 .errors {
     min-width: 100%;
     width: 0;
-    box-sizing: border-box;
     margin-top: 4px;
 
     display: flex;
@@ -97,10 +82,8 @@
 
 /* Button with + sign */
 .plus-button {
-    border-radius: 7px;
+    border-radius: var(--border-radius-sm);
     width: 48px;
-    min-width: 48px;
-    /* width: 15%; */
     height: 48px;
 }
 
@@ -128,8 +111,6 @@
     box-sizing: border-box;
 
     background-color: var(--bg-surface);
-    border-radius: 7px;
-    border: 1px solid var(--border-default);
 
     display: flex;
     align-items: center;

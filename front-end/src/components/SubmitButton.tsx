@@ -11,7 +11,7 @@ interface Props {
 export default function SubmitButton({ children }: Props) {
 
 
-    return <button type="submit" className="button submit-button">
+    return <button type="submit" className="button accent-hoover submit-button">
         {children}
     </button>
 }

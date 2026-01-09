@@ -1,5 +1,7 @@
 :root {
 
+  /*** COLORS ***/
+
   /* Palette colors */
   --palette-purple: #4f4979;
   --palette-blue: #1a9eff;
@@ -24,6 +26,17 @@
   --text-secondary: var(--palette-purple);
   --text-bright: var(--palette-white);
   --text-placeholder: var(--palette-darker-grey);
+
+
+  /*** BORDERS ***/
+  --border-radius-md: 10px;
+  --border-radius-sm: 7px;
+
+  /*** SHADOWS ***/
+  --shadow-lg: 0px 10px 10px rgba(0,0,0,0.2);
+  --shadow-md: 0px 5px 10px rgba(0,0,0,0.4);
+  --shadow-btn-hover: 0px 3px 10px rgba(0,0,0,0.4);
+  --shadow-btn-active: 0px 1px 10px rgba(0,0,0,0.4);
 }
 
 

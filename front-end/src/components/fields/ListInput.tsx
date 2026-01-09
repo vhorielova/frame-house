@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import "./Fields.css"
 import FieldErrors from "./FieldErrors";
+import '../../style-utilities/borders.css'
+import "./Fields.css"
 
 interface Props {
     name: string;
@@ -74,7 +75,7 @@ export default function ListInput({ name, placeholder, onChange, hints=[], error
 
         <div className="list-input-bar">
             <input 
-                className="field-box field-placeholder list-input" 
+                className="secondary-border accent-hoover accent-focus field-box field-placeholder list-input" 
                 list={optionsId} type="text" placeholder={placeholder}
                 onChange={(e) => {setValue(e.target.value)}}
                 onKeyDown={(e) => {
@@ -86,7 +87,7 @@ export default function ListInput({ name, placeholder, onChange, hints=[], error
                 value={value}
             />
             <button 
-                className="button plus-button" 
+                className="accent-hoover button plus-button" 
                 type="button" 
                 onClick={()=>{addValueToList(value)}}
             >+</button>
@@ -108,7 +109,7 @@ interface ValueElementProps {
 
 function ValueElement({ children, onRemove }: ValueElementProps) {
 
-    return <div className="list-input-chosen-item">
+    return <div className="secondary-border list-input-chosen-item">
         <div className="list-input-text">{children}</div>
         <button 
             className="remove-button"

@@ -1,5 +1,6 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import FieldErrors from "./FieldErrors";
+import '../../style-utilities/borders.css'
 
 
 interface Props {
@@ -58,7 +59,7 @@ export default function FileInput({ name, onChange, errors=[] }: Props) {
         />
 
         <button 
-            className="field-box field-file-input" 
+            className="secondary-border accent-hoover accent-focus field-box field-file-input" 
             type="button"
             onClick={handleClick}
         >
