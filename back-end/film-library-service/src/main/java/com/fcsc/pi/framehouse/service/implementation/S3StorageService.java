@@ -92,6 +92,13 @@ public class S3StorageService implements StorageService {
         return postersFolder + "/" + filename;
     }
 
+    public String extractExtension(String fileName) {
+        if (fileName != null && fileName.contains(".")) {
+            return fileName.substring(fileName.lastIndexOf("."));
+        }
+        return "";
+    }
+
     // -------------
     // StorageService implementation methods
     // ------------
@@ -131,7 +138,7 @@ public class S3StorageService implements StorageService {
     @Override
     public String generateNameAndSave(MultipartFile file, String filmName) throws IOException, FileAlreadyExistsException {
 
-        String fileName = generateFilename(filmName);
+        String fileName = generateFilename(filmName) + extractExtension(file.getOriginalFilename());
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
