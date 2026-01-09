@@ -1,0 +1,108 @@
+
+.search-bar {
+    width: 100%;
+    height: 148px;
+    padding: 10px 50px;
+
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-md);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-line {
+    width: 700px;
+    height: 48px;
+
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+.search-button {
+
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-sm);
+
+    text-decoration: none;
+    font-size: small;
+}
+
+
+
+.film-catalog {
+    width: 100%;
+    height: 100%;
+
+    /* padding: 10px; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: min-content;
+
+    gap: 24px;
+}
+
+.film-card {
+    background-color: var(--bg-from);
+    box-shadow: var(--shadow-lg);
+    padding: 30px;
+
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.film-card-image {
+  aspect-ratio: 2 / 3; 
+  width: 100%;
+  
+  object-fit: cover; 
+  
+  border-radius: var(--border-radius-sm);
+  display: block;
+}
+
+.film-card-title {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.film-card-origin {
+    font-size: x-small;
+    margin-bottom: 10px;
+}
+
+
+.film-card-genres {
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-content: flex-start;
+
+    padding-left: 0px;
+    margin-top: 5px;
+    gap: 5px;
+}
+
+.film-card-tag {
+    width: fit-content;
+    max-width: 100%;
+    height: 30px;
+
+    background-color: var(--bg-surface);
+    padding: 0 6px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: small;
+    
+}

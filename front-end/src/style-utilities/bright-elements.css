@@ -11,7 +11,7 @@
     background-color: var(--text-bright);    
     transition: background-color 0.2s, transform 0.1s;
 }
-.bright-bg-hoover:hover {
+.bright-bg-hoover:hover, .bright-bg-hoover:active {
     background-color: var(--color-accent);
 }
 

@@ -1,4 +1,7 @@
 import { useState, type FormEvent } from "react";
+
+import { API_URL } from "../../common/APIConstants";
+
 import Form from "../../components/Form";
 import Input from "../../components/fields/Input";
 import SubmitButton from "../../components/SubmitButton";
@@ -17,8 +20,6 @@ import {
 import toast from "react-hot-toast";
 
 
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AddFilmForm() {
 
