@@ -1,7 +1,7 @@
 import { FaUser } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
 
-import "./Common.css"
+import "./Navbar.css"
 import { Link } from "react-router-dom";
 
 

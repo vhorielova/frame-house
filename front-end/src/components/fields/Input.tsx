@@ -1,7 +1,7 @@
 import FieldErrors from './FieldErrors';
 
 import '../../style-utilities/borders.css'
-import './Fields.css'
+import './fields.css'
 
 interface Props {
     name: string;
