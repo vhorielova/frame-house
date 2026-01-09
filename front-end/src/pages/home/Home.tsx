@@ -33,7 +33,7 @@ export default function Home() {
   const [films, setFilms] = useState<FilmCardData[]>(startFilmData);
 
   useEffect( () => {
-    fetch(`${API_URL}/films/catalog?pageNumber=0&pageSize=10`)
+    fetch(`${API_URL}/films/catalog?pageNumber=0&pageSize=30`)
       .then( (response) => response.json() )
       .then( (data) => {
         setFilms(data);
@@ -97,11 +97,13 @@ export function FilmCard( { id, title, director, company, posterFilename, genres
 
     );
 
+    console.log("Vite storage URL:", STORAGE_URL);
+
     return <Link to={`/films/${id}`} className="primary-border film-card">
 
         <img 
             className="film-card-image"
-            src={"https://creativereview.imgix.net/uploads/2023/12/Oppenheimer.jpg?auto=compress,format&crop=faces,entropy,edges&fit=crop&q=60&w=1263&h=2000" /*STORAGE_URL + "/" + posterFilename*/} 
+            src={STORAGE_URL + "/" + posterFilename}
             alt="Film Poster"
         />
 
