@@ -1,0 +1,27 @@
+
+/*
+ * Common button styles
+ */
+
+/* General button */
+.button {
+    background-color: var(--color-primary);
+    color: white;
+
+    font-size: xx-small;
+    font-weight: 600;
+
+    box-shadow: var(--shadow-md);
+    border: none;
+
+    transition: all 0.1s ease;
+}
+
+.button:hover {
+    box-shadow: var(--shadow-btn-hover);
+}
+
+.button:active {
+    transform: scale(0.97);
+    box-shadow: var(--shadow-btn-active);
+}

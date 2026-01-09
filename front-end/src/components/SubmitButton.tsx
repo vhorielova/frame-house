@@ -2,6 +2,7 @@
  * This is a reusable button component.
  */
 import './Components.css'
+import '../style-utilities/buttons.css'
 
 interface Props {
     children: string;
