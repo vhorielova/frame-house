@@ -10,7 +10,7 @@ import java.util.List;
 public interface FilmService {
     void addFilm(CreateFilmRequest createFilmRequest, MultipartFile file);
 
-    public List<Film> searchFilmByTitle(String title);
+    List<Film> searchFilmByTitle(String title);
     List<Film> searchFilmByTitle(String title, boolean withoutDescriptions);
     List<FilmCatalogResponse> getCatalog(int page, int amount, String hint);
 

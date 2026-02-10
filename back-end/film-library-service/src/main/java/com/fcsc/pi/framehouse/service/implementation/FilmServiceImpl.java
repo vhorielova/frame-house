@@ -2,7 +2,6 @@ package com.fcsc.pi.framehouse.service.implementation;
 
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
 import com.fcsc.pi.framehouse.dto.FilmCatalogResponse;
-import com.fcsc.pi.framehouse.exceptions.GenreNotFoundException;
 import com.fcsc.pi.framehouse.models.Film;
 import com.fcsc.pi.framehouse.models.Genre;
 import com.fcsc.pi.framehouse.repository.FilmRepository;
@@ -52,7 +51,7 @@ public class FilmServiceImpl implements FilmService {
         filmRepository.save(film);
     }
 
-    private List<Genre> mapNamesToGenres(List<String> names) throws GenreNotFoundException {
+    private List<Genre> mapNamesToGenres(List<String> names) {
         return names.stream().map(genreService::createIfNotExistsAndGet).toList();
     }
 
