@@ -2,6 +2,7 @@ package com.fcsc.pi.framehouse.service.implementation;
 
 import com.fcsc.pi.framehouse.dto.CreateFilmRequest;
 import com.fcsc.pi.framehouse.dto.FilmCatalogResponse;
+import com.fcsc.pi.framehouse.exceptions.ResourceNotFound;
 import com.fcsc.pi.framehouse.models.Film;
 import com.fcsc.pi.framehouse.models.Genre;
 import com.fcsc.pi.framehouse.repository.FilmRepository;
@@ -23,6 +24,12 @@ public class FilmServiceImpl implements FilmService {
     private final FilmRepository filmRepository;
     private final GenreService genreService;
     private final S3StorageService s3StorageService;
+
+    @Override
+    public Film getFilm(int id) {
+        return filmRepository.findById(id)
+                .orElseThrow( () -> new ResourceNotFound("film"));
+    }
 
     /**
      * Saves film, saves the file, generation a new unique name for it
