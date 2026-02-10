@@ -11,41 +11,50 @@ import { useEffect, useState } from "react"
 
 export default function Home() {
 
-  const startFilmData: FilmCardData[] = [
-    {
-        id: -1,
-        title: "Example Film",
-        director: "Dir Examplestain",
-        company: "Example Production",
-        posterFilename: "unexisting-poster.png",
-        genres: ["Example", "Hardcoded", "Three tags"]
-    },
-    {
-        id: -2,
-        title: "Test Film",
-        director: "Dir Testenko",
-        company: "Test Production",
-        posterFilename: "unexisting-poster.png",
-        genres: ["Test", "Hardcoded"]
-    }
-  ]
-
-  const [films, setFilms] = useState<FilmCardData[]>(startFilmData);
+  const [hintInput, setHintInput] = useState('');
+  const [hint, setHint] = useState('');
+  const [films, setFilms] = useState<FilmCardData[] | null>(null);
 
   useEffect( () => {
-    fetch(`${API_URL}/films/catalog?pageNumber=0&pageSize=30`)
+    setFilms(null);
+    const startTime = new Date();
+    let ignore = false;
+
+    const params = new URLSearchParams({
+        pageNumber: "0",
+        pageSize: "30"
+    });
+    if (hint) {
+        params.append("hint", hint);
+    }
+    
+    fetch(`${API_URL}/films/catalog?${params.toString()}`)
       .then( (response) => response.json() )
       .then( (data) => {
-        setFilms(data);
+        if (!ignore) {
+            const endTime = new Date();
+            console.log("Loaded for:", (endTime.getTime() - startTime.getTime())/1000 );
+            setFilms(data);
+        }
       })
       .catch( (error) => {
         console.error("Error fetching catalog films:", error);
       });
-    
-  }, [] );
 
-  const filmCards = films.map( (film) => 
-    <FilmCard 
+      return () => {ignore = true}
+    
+  }, [hint] );
+
+  let filmsResult = null;
+
+  if (films === null) {
+    filmsResult = <h2>Loading films...</h2>
+
+  } else if (films.length === 0) {
+    filmsResult = <h2>No films found</h2>
+    
+  } else {
+    const filmCards = films.map( (film) => <FilmCard 
         key={film.id}
         id={film.id}
         title={film.title}
@@ -53,26 +62,38 @@ export default function Home() {
         company={film.company}
         posterFilename={film.posterFilename}
         genres={film.genres}
-    />
-  );
+    />);
+    
+    filmsResult = <div className="film-grid">{filmCards}</div>;
+  }
 
   return (
     <>
         <div className="content-box search-bar">
-            <div className="search-line">
+            <form 
+                className="search-line"
+                onSubmit={ (e) => {
+                    e.preventDefault();
+                    setHint(hintInput);
+                }}
+            >
                 <input 
                     className="secondary-border accent-hoover accent-focus field-box field-placeholder" 
                     type="text" placeholder="Type here..." 
-                />    
+                    value={hintInput}
+                    onChange={ e => { setHintInput(e.target.value) }}                />    
 
-                <button type="button" className="button bright-bg-hoover search-button">
+                <button
+                    type="submit" 
+                    className="button bright-bg-hoover search-button"
+                >
                     Search
                 </button>   
-            </div>             
+            </form>             
         </div>
 
         <div className="film-catalog">
-            {filmCards}
+            {filmsResult}
         </div>
     </>
   );
@@ -92,12 +113,10 @@ export function FilmCard( { id, title, director, company, posterFilename, genres
 
     const genreItems = genres.map( 
         item => <div 
-            key={item} className="secondary-border film-card-tag">{item}
+            key={item} className="secondary-border film-card-tag">{item[0].toUpperCase() + item.slice(1)}
         </div>
 
     );
-
-    console.log("Vite storage URL:", STORAGE_URL);
 
     return <Link to={`/films/${id}`} className="primary-border film-card">
 
@@ -107,7 +126,7 @@ export function FilmCard( { id, title, director, company, posterFilename, genres
             alt="Film Poster"
         />
 
-        <div><h3 className="film-card-title">{title}</h3></div>
+        <h3 className="film-card-title">{title}</h3>
 
         <div className="film-card-origin">
             By: <b>{director}</b>
