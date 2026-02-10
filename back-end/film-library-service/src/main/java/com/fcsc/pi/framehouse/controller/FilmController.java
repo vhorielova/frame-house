@@ -21,6 +21,11 @@ public class FilmController {
 
     final FilmService filmService;
 
+    @GetMapping("/{id}")
+    public Film getFilm(@PathVariable int id) {
+        return filmService.getFilm(id);
+    }
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> addFilm(
             @RequestPart("request") CreateFilmRequest request,

@@ -8,9 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface FilmService {
+
+    Film getFilm(int id);
+
     void addFilm(CreateFilmRequest createFilmRequest, MultipartFile file);
 
-    public List<Film> searchFilmByTitle(String title);
+    List<Film> searchFilmByTitle(String title);
     List<Film> searchFilmByTitle(String title, boolean withoutDescriptions);
     List<FilmCatalogResponse> getCatalog(int page, int amount, String hint);
 
